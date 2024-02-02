@@ -1,8 +1,9 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { User,EditUser} from "../models/user.model.js"
-
-import {generateOTP} from '../managers/otpManager.js'
-import Jwt from 'jsonwebtoken'
+const { asyncHandler } =require( "../utils/asyncHandler.js");
+const { User,EditUser} =require( "../models/user.model.js")
+const categoryPath=require('../managers/fileManager.js')
+const {generateOTP} =require( '../managers/otpManager.js')
+const Jwt =require( 'jsonwebtoken')
+const path =require('path')
 
 const SendOtp = asyncHandler(async (req, res) => {
   try {
@@ -17,7 +18,6 @@ const SendOtp = asyncHandler(async (req, res) => {
     // Generate a new OTP
     const otp = generateOTP();
     const expirationTime = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes expiration time
-
     if (existingUser) {
       // User already exists, send OTP for login
       await User.findOneAndUpdate({ mobile }, { otp, expirationTime });
@@ -28,6 +28,7 @@ const SendOtp = asyncHandler(async (req, res) => {
     // User doesn't exist in the temporary collection, create a new user
     const newUser = new User({ mobile, otp, expirationTime });
     await newUser.save();
+    console.log(otp)
 
     // TODO: Send the OTP to the user (via SMS or email)
     return res.status(201).json({ status: "success", message: "User created" });
@@ -40,7 +41,7 @@ const VerifyOtp = asyncHandler(async (req, res) => {
   try {
     const { mobile, enteredOtp } = req.body;
 
-    // Retrieve the stored OTP from the temporary collection (User)
+    // Retrieve the stored OTP =require( the temporary collection (User)
     const storedOtp = await User.findOne({ mobile });
 
     if (!storedOtp || storedOtp.expirationTime < Date.now()) {
@@ -53,7 +54,7 @@ const VerifyOtp = asyncHandler(async (req, res) => {
     } else {
       // Correct OTP
 
-      // Get user details from the temporary collection (User)
+      // Get user details =require( the temporary collection (User)
       const userToUpdate = await User.findOne({ mobile });
 
       // Create a new user in the permanent collection (EditUser)
@@ -73,7 +74,7 @@ const VerifyOtp = asyncHandler(async (req, res) => {
 
       await editUser.save();
 
-      // Remove the used OTP from the temporary collection (User)
+      // Remove the used OTP =require( the temporary collection (User)
       const secretKey = process.env.ACCESS_TOKEN_SECRET;
       await User.deleteOne({ mobile });
       const token = Jwt.sign({ userId: editUser._id }, secretKey, { expiresIn: process.env.ACCESS_TOKEN_EXPIRY });
@@ -171,6 +172,6 @@ const SigninWithGoogle=async(req,res)=>{
 
 
 
-export {
+module.exports=  {
     SendOtp,VerifyOtp,ResendOtp,SigninWithGoogle
 }

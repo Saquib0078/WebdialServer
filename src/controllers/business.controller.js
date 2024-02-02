@@ -1,5 +1,5 @@
-import { business } from "../models/business.model.js";
-import { ResponseUtility } from "../utils/ApiError.js";
+const { business } =require( "../models/business.model.js");
+const { ResponseUtility } =require("../utils/ApiError.js");
 
 const CreateBusiness= async(req,res)=>{
 
@@ -86,4 +86,4 @@ const UpdateBusiness = async (req, res) => {
     
 
 
-export{CreateBusiness,DeleteBusiness,UpdateBusiness,GetBusiness}
+  module.exports= {CreateBusiness,DeleteBusiness,UpdateBusiness,GetBusiness}

@@ -1,9 +1,9 @@
-import { Router } from "express";
-// import { upload } from '../middlewares/multer.middleware.js';
-import multer from 'multer'
-import { generateRandomID } from '../utils/appHelper.js';
-// import {upload} from '../middlewares/multer.middleware.js'
-import { CreateBusiness } from "../controllers/business.controller.js";
+const { Router } =require( "express");
+// const { upload } =require( '../middlewares/multer.middleware.js';
+const multer =require( 'multer')
+const { generateRandomID } =require( '../utils/appHelper.js');
+// const {upload} =require( '../middlewares/multer.middleware.js'
+const { CreateBusiness } =require( "../controllers/business.controller.js");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './data/business' + "/");
@@ -28,4 +28,4 @@ router.post('/createBusiness',CreateBusiness)
 // router.get('/images/:filename',getImages)
 
 
-export default router;
+module.exports= router;

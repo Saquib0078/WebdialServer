@@ -1,7 +1,7 @@
-import mongoose, {Schema} from "mongoose";
-import { getIndianTime } from "../managers/timeManager.js";
+const mongoose =require("mongoose");
+const { getIndianTime } =require ("../managers/timeManager.js");
 
-const BusinessSchema=new Schema({
+const BusinessSchema=new mongoose.Schema({
 
     BusinessName: {
         type: String,
@@ -47,6 +47,6 @@ const BusinessSchema=new Schema({
 
 const business = mongoose.model("Business", BusinessSchema)
 
-export
+module.exports= 
 {business}
 

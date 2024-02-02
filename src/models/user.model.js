@@ -1,9 +1,9 @@
-import mongoose, {Schema} from "mongoose";
-import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
-import { getIndianTime } from "../managers/timeManager.js";
+const mongoose =require( "mongoose");
+const jwt =require( "jsonwebtoken")
+const bcrypt =require( "bcrypt")
+const { getIndianTime } =require( "../managers/timeManager.js");
 
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
     {
         mobile: {
             type: Number,
@@ -20,7 +20,7 @@ const userSchema = new Schema(
     }
 )
 
-const UserMainSchema=new Schema({
+const UserMainSchema=new mongoose.Schema({
     name: {
         type: String,
         trim: true, 
@@ -100,4 +100,4 @@ userSchema.methods.generateRefreshToken = function(){
  const EditUser=mongoose.model("User",UserMainSchema)
 
 
- export{User,EditUser}
+ module.exports= {User,EditUser}

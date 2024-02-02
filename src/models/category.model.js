@@ -1,9 +1,9 @@
-import mongoose, {Schema} from "mongoose";
-import { getIndianTime } from "../managers/timeManager.js";
+const mongoose =require( "mongoose");
+const { getIndianTime } =require ("../managers/timeManager.js");
 
 
 // RestrauntName,ratings,address,timing,serviceReview,enqueries,type
-const MainCategorySchema=new Schema({
+const MainCategorySchema=new mongoose.Schema({
 
     CategoryName: {
         type: String,
@@ -18,7 +18,7 @@ const MainCategorySchema=new Schema({
     timestamps:true
 })
 
-const SubCategorySchema=new Schema({
+const SubCategorySchema=new mongoose.Schema({
     subCategoryName:{
         type: String,
         required: true,
@@ -26,13 +26,13 @@ const SubCategorySchema=new Schema({
     },
     categoryId :{
         type:mongoose.Schema.Types.ObjectId,
-        required:true
+        ref:'MainCategory'
     }
 },{
     timestamps:true
 })
 
-const categorySchemaSingle = new Schema(
+const categorySchemaSingle = new mongoose.Schema(
     {
         Name: {
             type: String,
@@ -81,7 +81,7 @@ const categorySchemaSingle = new Schema(
 )
 
 
-const categorySchema = new Schema(
+const categorySchema = new mongoose.Schema(
     {
         RestrauntName: {
             type: String,
@@ -115,13 +115,11 @@ const categorySchema = new Schema(
         },
         ImageUrl: {
             type: [String],
-
-            required: true,
+           required: true,
         },
         categoryType: {
             type: mongoose.Schema.Types.ObjectId,
              ref:"subcategorylist",
-             required:true
         },
         time: {type: String, default:getIndianTime(), required: true}
 
@@ -139,4 +137,4 @@ const categoryarray = new mongoose.model("subcategorylistarray", categorySchema)
 const mainCategory = new mongoose.model("MainCategory", MainCategorySchema);
 
 
-export{category,subcategory,singleCategory,categoryarray,mainCategory}
+module.exports= {category,subcategory,singleCategory,categoryarray,mainCategory}

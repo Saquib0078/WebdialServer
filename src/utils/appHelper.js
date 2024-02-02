@@ -8,6 +8,6 @@ const generateRandomID = (length = 10) => {
     return id;
 }
 
-export {
+module.exports=  {
     generateRandomID
 }

@@ -12,6 +12,6 @@ const sendOTP = (number, otp) => {
 
 
 }
-export {
+module.exports=  {
     sendOTP, generateOTP
 }

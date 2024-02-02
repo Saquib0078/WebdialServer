@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { ResendOtp, SendOtp,SigninWithGoogle,VerifyOtp } from "../controllers/user.controller.js";
-import {upload} from "../middlewares/multer.middleware.js"
-import{CreatePost} from '../controllers/category.controller.js'
+const express =require( "express");
+const { ResendOtp, SendOtp,SigninWithGoogle,VerifyOtp,getBroadcastMedia } =require("../controllers/user.controller.js");
 
-const router = Router()
+
+const router = express.Router();
+
 
 
 
@@ -18,4 +18,4 @@ router.post("/SigninWithGoogle",SigninWithGoogle)
     
 
 
-export default router
+module.exports = router;

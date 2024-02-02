@@ -1,5 +1,5 @@
-import {v2 as cloudinary} from "cloudinary"
-import fs from "fs"
+const cloudinary =require( "cloudinary")
+const fs =require ("fs")
 
 
 cloudinary.config({ 

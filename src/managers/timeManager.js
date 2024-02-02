@@ -42,6 +42,6 @@ function getGreeting() {
     return greeting;
 }
 
-export {
+module.exports=  {
     getIndianTime, getGreeting
 }

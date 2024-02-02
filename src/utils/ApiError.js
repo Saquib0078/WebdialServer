@@ -37,4 +37,4 @@ class ResponseUtility {
     }
   }
 
-export {ApiError,ResponseUtility}
+module.exports= {ApiError,ResponseUtility}
