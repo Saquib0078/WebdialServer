@@ -29,7 +29,7 @@ const CreatePost = async (req, res) => {
   
 
       // Save the new restaurant to the database
-      const savedRestaurant = await newRestaurant.save();
+      const savedRestaurant = await newRestaurant.create();
        
       // Respond with the saved restaurant data
       res.status(201).json(savedRestaurant);
@@ -38,6 +38,24 @@ const CreatePost = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+
+
+  const getData=async (req,res)=>{
+try {
+  const id=req.params.id
+
+  const data=await category.find({categoryType:id})
+  if(!data)  return res.status(400).send("No data Found")
+
+  return res.status(200).json({data:data})
+
+} catch (error) {
+  return res.status(500).json({error:error.message})
+
+}
+
+
+  }
   
   
   // const getImages= async(req, res) => {
@@ -48,7 +66,7 @@ const CreatePost = async (req, res) => {
   
   const CreateCategoryList = async (req, res) => {
     try {
-      const { CategoryName } = req.body;
+      const { CategoryName,Type } = req.body;
       const Image = req.file;
   
       if (!CategoryName) {
@@ -60,6 +78,7 @@ const CreatePost = async (req, res) => {
       const category = {
         CategoryName,
         Image:Image.filename,
+        Type
       };
   
       const createCategory = await mainCategory.create(category);
@@ -69,6 +88,17 @@ const CreatePost = async (req, res) => {
       return res.status(500).json({ error: error.message });
     }
   };
+
+
+  const getBottomSheetCategory=async (req,res)=>{
+    try {
+      const result=await mainCategory.find({Type:"BottomSheet"})
+      return res.status(200).json({result});
+    } catch (error) {
+      return res.status(500).json({error:error.message});
+
+    }
+  }
   
 
   const SubCategory=async(req,res)=>{
@@ -129,7 +159,7 @@ return res.status(200).json({status:"success",data:createSingleCat})
   const getCategory=async(req,res)=>{
 try {
   // const id = req.params.id;  
-  const result = await mainCategory.find(); // Replace 'categoryName' with the actual field name in your model
+  const result = await mainCategory.find({Type:"main"}); 
 
   
   return res.status(200).json({ result });
@@ -143,6 +173,40 @@ try {
 
   }
 
+  const getCategoryRec=async(req,res)=>{
+    try {
+      // const id = req.params.id;  
+      const result = await mainCategory.find({Type:"BottomSheetRec"}); 
+    
+      
+      return res.status(200).json({ result });
+    
+    
+    
+    } catch (error) {
+      return res.status(500).json({error:error.message})
+    
+    }
+    
+      }
+
+      const Travel=async(req,res)=>{
+        try {
+          // const id = req.params.id;  
+          const result = await mainCategory.find({Type:"Travel"}); 
+        
+          
+          return res.status(200).json({ result });
+        
+        
+        
+        } catch (error) {
+          return res.status(500).json({error:error.message})
+        
+        }
+        
+          }
+    
   const getSubCategory=async(req,res)=>{
     const categoryId = req.params.categoryId;
 
@@ -182,4 +246,5 @@ try {
 
   module.exports=  {
     CreatePost,CreateCategoryList,SubCategory,SingleImageCategory,getCategory,getBroadcastMedia,getSubCategory
+    ,getData,getBottomSheetCategory,getCategoryRec,Travel
 }

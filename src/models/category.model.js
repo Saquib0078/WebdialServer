@@ -14,6 +14,10 @@ const MainCategorySchema=new mongoose.Schema({
         type: String,
         required: true,
     },
+    Type:{
+        type: String,
+        default:"main"
+    }
 },{
     timestamps:true
 })

@@ -41,7 +41,7 @@ app.use("/api/v1/business", businessRouter)
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI+"/webdialserver");
+        await mongoose.connect(process.env.MONGODB_URI+"/WebDial");
         console.log('MongoDB connected');
     } catch (error) {
         console.error('MongoDB connection failed', error);

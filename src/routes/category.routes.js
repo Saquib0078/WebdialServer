@@ -1,4 +1,5 @@
-const{CreateCategoryList, CreatePost,SingleImageCategory,SubCategory,getCategory,getBroadcastMedia,getSubCategory} =require( '../controllers/category.controller.js')
+const{CreateCategoryList, CreatePost,SingleImageCategory,SubCategory,getCategory,getBroadcastMedia,getSubCategory
+,getData,getBottomSheetCategory,getCategoryRec,Travel} =require( '../controllers/category.controller.js')
 const { Router } =require( "express");
 // const { upload } =require( '../middlewares/multer.middleware.js';
 const multer =require( 'multer')
@@ -35,8 +36,13 @@ router.post("/upload-SubCategory",SubCategory);
 router.get("/get-maincategory",getCategory);
 router.get("/getSubCategory/:categoryId",getSubCategory);
 
-
+router.get('/category-data/:id',getData)
 router.get("/getBroadcastMedia/:broadcastMediaID", getBroadcastMedia);
+router.get('/getBottomSheetCategory',getBottomSheetCategory)
+router.get('/getCategoryRec',getCategoryRec)
+router.get('/Travel',Travel)
+
+
 
 // router.get('/images/:filename',getImages)
 
