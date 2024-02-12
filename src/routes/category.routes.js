@@ -36,11 +36,12 @@ router.post("/upload-SubCategory",SubCategory);
 router.get("/get-maincategory",getCategory);
 router.get("/getSubCategory/:categoryId",getSubCategory);
 
-router.get('/category-data/:id',getData)
+router.get('/category-data',getData)
 router.get("/getBroadcastMedia/:broadcastMediaID", getBroadcastMedia);
 router.get('/getBottomSheetCategory',getBottomSheetCategory)
 router.get('/getCategoryRec',getCategoryRec)
 router.get('/Travel',Travel)
+
 
 
 

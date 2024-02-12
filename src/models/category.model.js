@@ -121,6 +121,10 @@ const categorySchema = new mongoose.Schema(
             type: [String],
            required: true,
         },
+        chipBtns:{
+            type: [String],
+            required: true,
+        },
         categoryType: {
             type: mongoose.Schema.Types.ObjectId,
              ref:"subcategorylist",

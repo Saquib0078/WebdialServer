@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const connectDB = async () => {
-    try {
-        const connectionInstance = await mongoose.connect("mongodb+srv://saquib007:IUnXazhITeBF13a0@cluster0.eo7jwgy.mongodb.net/webdialserver");
-        console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
-    } catch (error) {
-        console.log("MONGODB connection FAILED ", error);
-        process.exit(1);
-    }
-};
+// const connectDB = async () => {
+//     try {
+//         const connectionInstance = await mongoose.connect("mongodb+srv://saquib007:IUnXazhITeBF13a0@cluster0.eo7jwgy.mongodb.net/webdialserver");
+//         console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
+//     } catch (error) {
+//         console.log("MONGODB connection FAILED ", error);
+//         process.exit(1);
+//     }
+// };
 
-module.exports = connectDB;
+// module.exports = connectDB;

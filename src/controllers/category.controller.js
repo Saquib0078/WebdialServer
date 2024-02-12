@@ -4,7 +4,7 @@ const { categoryPath } = require('../managers/fileManager.js');
 
 const CreatePost = async (req, res) => {
     try {
-      const { RestrauntName, ratings, address, serviceReview, enqueries, type ,categoryType} = req.body;
+      const { RestrauntName, ratings, address, serviceReview, enqueries, type ,categoryType,chipBtns} = req.body;
        const imageFilenames=req.files;
       // Check if files were uploaded
         console.log(imageFilenames)
@@ -24,15 +24,16 @@ const CreatePost = async (req, res) => {
         enqueries,
         type,
         categoryType,
+        chipBtns,
         ImageUrl:imageUrls
       });
   
 
       // Save the new restaurant to the database
-      const savedRestaurant = await newRestaurant.create();
+      const savedRestaurant = await newRestaurant.save();
        
       // Respond with the saved restaurant data
-      res.status(201).json(savedRestaurant);
+      res.status(201).json({savedCategory:savedRestaurant});
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: error.message });
@@ -42,9 +43,9 @@ const CreatePost = async (req, res) => {
 
   const getData=async (req,res)=>{
 try {
-  const id=req.params.id
+  // const id=req.params.id
 
-  const data=await category.find({categoryType:id})
+  const data=await category.find()
   if(!data)  return res.status(400).send("No data Found")
 
   return res.status(200).json({data:data})
